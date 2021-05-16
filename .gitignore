@@ -1,7 +1,8 @@
+/.vs/
+*/.vs/
+
 # Prerequisites
 *.d
-/.vs/
-/*/.vs/
 
 # Object files
 *.o
