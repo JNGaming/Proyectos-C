@@ -65,14 +65,14 @@ int main(int argc, char **argv)
 	{
 		if (atoi(argv[1]) == 8) // Tranformar un string en un entero con atoi
 		{
-			char* a = randomPassword(8);
+			char *a = randomPassword(8);
 
 			printf("La contraseña es: %s\n", a);
 			return (0);
 		}
 		else if (atoi(argv[1]) == 16) // Tranformar un string en un entero con atoi
 		{
-			char* a = randomPassword(16);
+			char *a = randomPassword(16);
 
 			printf("La contraseña es: %s\n", a);
 			return (0);
