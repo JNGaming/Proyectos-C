@@ -1,33 +1,91 @@
 // DONE BY VERA
 
-//Librerías
+// Librerías
 #include <stdio.h>
 #include <stdlib.h>
 
-char *dic = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789!@#$%%&/()=?¿¡*-+{}[]_.:,;><`^´|";
-int a = 92;
-
 // Función para generar una constraseña aleatoria
 
-char *randomPassword(void)
+char *randomPassword(int x)
 {
+	// Debemos usar srand() ya que la función rand() "calcula" sólo los números, y cada vez que se ejecuta el programa, saca los mismos números
+
+	srand(getpid());
+
+	// Definición de variables (contador, nuevo contenedor de la cadena, primer valor de la cadena dic)
+
 	int i = 0;
 	char *k = "";
+	int a = 1;
+	int dic2 = 126;
+	int y = rand() % dic2;
+	int dic1 = y;
 
-	while (i <= 8)
+	// Mientras el contador sea menor o igual al número pasado como parámetro
+
+	while (i <= x)
 	{
+		// Cambia el valor base de dic1 para añadirlo a la nueva cadena
+
+		dic1 = (dic1 * 2);
+
+		// Si dic1 se pasa de dic2, dic1 vuelve al valor principal y se le suma un número
+
+		if (dic1 >= dic2)
+		{
+			dic1 = y + (a * 2);
+		}
+
+		k[i] = dic1;
 		i++;
+		a++;
+		dic1++;
 	}
-	//k[i] = '\0';
-	return (dic);
+
+	// Añade un final de cadena a la nueva cadena
+
+	k[i - 1] = '\0';
+
+	// Si la cadena está vacía, usa la recursividad para volver a crear la constraseña
+
+	if (k == '\0')
+	{
+		randomPassword(x);
+	}
+
+	return (k);
 }
 
 // Función main
 
-int main(void)
+int main(int argc, char **argv)
 {
-	char *a = randomPassword();
+	// Si los argumentos pasados como parámetro son diferentes a 2 (nombre del programa y el primer parámetro) salta error
+	if (argc == 2)
+	{
+		if (atoi(argv[1]) == 8) // Tranformar un string en un entero con atoi
+		{
+			char* a = randomPassword(8);
 
-	printf("La contraseña es: ");
-	printf("%s\n", a);
+			printf("La contraseña es: %s\n", a);
+			return (0);
+		}
+		else if (atoi(argv[1]) == 16) // Tranformar un string en un entero con atoi
+		{
+			char* a = randomPassword(16);
+
+			printf("La contraseña es: %s\n", a);
+			return (0);
+		}
+		else
+		{
+			printf("El valor es incorrecto.\nValores que puedes introducir:\n- 8\n- 16");
+			return (0);
+		}
+	}
+	else
+	{
+		printf("Debes definir la longitud de tu contraseña.\nValores que puedes introducir:\n- 8\n- 16");
+		return (0);
+	}
 }
