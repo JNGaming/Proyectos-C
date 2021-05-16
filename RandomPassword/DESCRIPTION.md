@@ -5,6 +5,6 @@ Debes ejecutar el archivo, añadiendo como parámetro un 8 o un 16, para saber q
 
 Logs:
 
-- v1.2 = Ahora las contraseñas sacadas, se guardan en un archivo llamado "passwordsGenerated.txt"
+- v1.2 = Las contraseñas sacadas se guardan en un archivo llamado "passwordsGenerated.txt"
 - v1.1 = Mejora del algoritmo, añadidos comentarios
 - v1.0 = Añadidos todos los caracteres alfanuméricos
