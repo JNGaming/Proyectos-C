@@ -33,7 +33,7 @@ char *randomPassword(int x)
 	char *newPassword = "";
 	int a = 1;
 	int dic2 = 126;
-	int y = rand() % dic2;
+	int y = rand() % dic2 + 33;
 	int dic1 = y;
 
 	// Mientras el contador sea menor o igual al número pasado como parámetro
