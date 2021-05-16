@@ -12,7 +12,7 @@ void savePassword(char *a)
 
 	file = fopen("passwordsGenerated.txt", "a+"); // Abrimos el archivo donde deseamos guardar las contraseñas generadas
 
-	fprintf(file, "- %s\n", a);	//fputs(a, file); // Editamos el archivo y añadimos la contraseña
+	fprintf(file, "- %s\n", a); // Editamos el archivo y añadimos la contraseña
 
 	fclose(file); // Cerramos el archivo
 
