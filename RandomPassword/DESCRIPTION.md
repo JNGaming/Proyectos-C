@@ -1,4 +1,4 @@
--Generador de contraseñas aleatorias.-
+#Generador de contraseñas aleatorias
 
 ¿Cómo funciona?
 Debes ejecutar el archivo, añadiendo como parámetro un 8 o un 16, para saber qué longitud quieres para la contraseña.
