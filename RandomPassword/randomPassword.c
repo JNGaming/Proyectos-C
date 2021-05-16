@@ -12,14 +12,14 @@ int a = 92;
 char *randomPassword(void)
 {
 	int i = 0;
-	char k = "";
+	char *k = "";
 
 	while (i <= 8)
 	{
-		k[i] = rand() % a;
+		i++;
 	}
-	k[i + 1] = "\0";
-	return (k);
+	//k[i] = '\0';
+	return (dic);
 }
 
 // Función main
