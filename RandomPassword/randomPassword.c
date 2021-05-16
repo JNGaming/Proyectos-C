@@ -4,6 +4,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Función para añadir la contraseña a un archivo con extensión .txt
+
+void savePassword(char *a)
+{
+	FILE* file;
+
+	file = fopen("passwordsGenerated.txt", "a+"); // Abrimos el archivo donde deseamos guardar las contraseñas generadas
+
+	fprintf(file, "- %s\n", a);	//fputs(a, file); // Editamos el archivo y añadimos la contraseña
+
+	fclose(file); // Cerramos el archivo
+
+	printf("La contraseña ha sido guardada\n");
+}
+
 // Función para generar una constraseña aleatoria
 
 char *randomPassword(int x)
@@ -15,7 +30,7 @@ char *randomPassword(int x)
 	// Definición de variables (contador, nuevo contenedor de la cadena, primer valor de la cadena dic)
 
 	int i = 0;
-	char *k = "";
+	char *newPassword = "";
 	int a = 1;
 	int dic2 = 126;
 	int y = rand() % dic2;
@@ -36,7 +51,7 @@ char *randomPassword(int x)
 			dic1 = y + (a * 2);
 		}
 
-		k[i] = dic1;
+		newPassword[i] = dic1;
 		i++;
 		a++;
 		dic1++;
@@ -44,16 +59,16 @@ char *randomPassword(int x)
 
 	// Añade un final de cadena a la nueva cadena
 
-	k[i - 1] = '\0';
+	newPassword[i - 1] = '\0';
 
 	// Si la cadena está vacía, usa la recursividad para volver a crear la constraseña
 
-	if (k == '\0')
+	if (newPassword == '\0')
 	{
 		randomPassword(x);
 	}
 
-	return (k);
+	return (newPassword);
 }
 
 // Función main
@@ -65,16 +80,22 @@ int main(int argc, char **argv)
 	{
 		if (atoi(argv[1]) == 8) // Tranformar un string en un entero con atoi
 		{
-			char *a = randomPassword(8);
+			char *a = randomPassword(8); // Guardamos la contraseña devuelta en una variable
 
-			printf("La contraseña es: %s\n", a);
+			printf("La contraseña es: %s\n", a); // Mostramos la contraseña por consola
+
+			savePassword(a); // Llamamos a la función para que guarde la contraseña en un archivo .txt
+
 			return (0);
 		}
 		else if (atoi(argv[1]) == 16) // Tranformar un string en un entero con atoi
 		{
-			char *a = randomPassword(16);
+			char *a = randomPassword(16); // Guardamos la contraseña devuelta en una variable
 
-			printf("La contraseña es: %s\n", a);
+			printf("La contraseña es: %s\n", a); // Mostramos la contraseña por consola
+
+			savePassword(a); // Llamamos a la función para que guarde la contraseña en un archivo .txt
+
 			return (0);
 		}
 		else
