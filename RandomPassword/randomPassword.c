@@ -23,38 +23,15 @@ void savePassword(char *a)
 
 char *randomPassword(int x)
 {
-	// Debemos usar srand() ya que la función rand() "calcula" sólo los números, y cada vez que se ejecuta el programa, saca los mismos números
-
-	srand(getpid());
-
-	// Definición de variables (contador, nuevo contenedor de la cadena, primer valor de la cadena dic)
-
 	int i = 0;
 	char *newPassword = "";
-	int a = 1;
-	int dic2 = 126;
-	int y = rand() % dic2 + 33;
-	int dic1 = y;
-
-	// Mientras el contador sea menor o igual al número pasado como parámetro
+	char* o = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#%$!¡¿?/&()[]{}='^*+-_.:,;><";
 
 	while (i <= x)
 	{
-		// Cambia el valor base de dic1 para añadirlo a la nueva cadena
-
-		dic1 = (dic1 * 2);
-
-		// Si dic1 se pasa de dic2, dic1 vuelve al valor principal y se le suma un número
-
-		if (dic1 >= dic2)
-		{
-			dic1 = y + (a * 2);
-		}
-
-		newPassword[i] = dic1;
+		int b = rand() % 93;
+		newPassword[i] = o[b];
 		i++;
-		a++;
-		dic1++;
 	}
 
 	// Añade un final de cadena a la nueva cadena
@@ -78,6 +55,10 @@ int main(int argc, char **argv)
 	// Si los argumentos pasados como parámetro son diferentes a 2 (nombre del programa y el primer parámetro) salta error
 	if (argc == 2)
 	{
+		// Debemos usar srand() ya que la función rand() "calcula" sólo los números, y cada vez que se ejecuta el programa, saca los mismos números
+
+		srand(getpid());
+
 		if (atoi(argv[1]) == 8) // Tranformar un string en un entero con atoi
 		{
 			char *a = randomPassword(8); // Guardamos la contraseña devuelta en una variable
