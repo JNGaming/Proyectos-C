@@ -5,194 +5,24 @@
 #include <stdio.h>
 #include <string.h>
 
-// Función para calcular la longitud del string
-/*int length(char* a)
+// Función para buscar la posición del caracter buscado
+
+int search(char a)
 {
-	int i = 0;
-
-	while (*a != '\0')
-	{
-		i++;
-		a++;
-	}
-	return (i);
-}*/
-
-// Función para buscar en el diccionario
-
-char hash(char a)
-{
-	FILE* file;
+	char cad1[53] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+	int length = sizeof(cad1);
 	char newChar;
-	char x;
 	int i = 0;
 
-	file = fopen("dic.txt", "r");
-
-	x = fgetc(file);
-
-	switch (a)
+	while (i <= length)
 	{
-		case 'A':
-			newChar = '1';
-			break;
-		case 'B':
-			newChar = '2';
-			break;
-		case 'C':
-			newChar = '3';
-			break;
-		case 'D':
-			newChar = '4';
-			break;
-		case 'E':
-			newChar = '5';
-			break;
-		case 'F':
-			newChar = '6';
-			break;
-		case 'G':
-			newChar = '7';
-			break;
-		case 'H':
-			newChar = '8';
-			break;
-		case 'I':
-			newChar = '9';
-			break;
-		case 'J':
-			newChar = '0';
-			break;
-		case 'K':
-			newChar = '?';
-			break;
-		case 'L':
-			newChar = '¿';
-			break;
-		case 'M':
-			newChar = '¡';
-			break;
-		case 'N':
-			newChar = '!';
-			break;
-		case 'O':
-			newChar = '\"';
-			break;
-		case 'P':
-			newChar = '\'';
-			break;
-		case 'Q':
-			newChar = '=';
-			break;
-		case 'R':
-			newChar = ')';
-			break;
-		case 'S':
-			newChar = '(';
-			break;
-		case 'T':
-			newChar = '[';
-			break;
-		case 'U':
-			newChar = ']';
-			break;
-		case 'V':
-			newChar = '+';
-			break;
-		case 'W':
-			newChar = '*';
-			break;
-		case 'X':
-			newChar = '}';
-			break;
-		case 'Y':
-			newChar = '{';
-			break;
-		case 'Z':
-			newChar = '.';
-			break;
-		case 'a':
-			newChar = ':';
-			break;
-		case 'b':
-			newChar = ';';
-			break;
-		case 'c':
-			newChar = ',';
-			break;
-		case 'd':
-			newChar = '-';
-			break;
-		case 'e':
-			newChar = '/';
-			break;
-		case 'f':
-			newChar = '&';
-			break;
-		case 'g':
-			newChar = '\\';
-			break;
-		case 'h':
-			newChar = '%';
-			break;
-		case 'i':
-			newChar = '$';
-			break;
-		case 'j':
-			newChar = '#';
-			break;
-		case 'k':
-			newChar = '@';
-			break;
-		case 'l':
-			newChar = '<';
-			break;
-		case 'm':
-			newChar = '>';
-			break;
-		case 'n':
-			newChar = '|';
-			break;
-		case 'o':
-			newChar = '_';
-			break;
-		case 'p':
-			newChar = '^';
-			break;
-		case 'q':
-			newChar = 'ä';
-			break;
-		case 'r':
-			newChar = 'ë';
-			break;
-		case 's':
-			newChar = 'ï';
-			break;
-		case 't':
-			newChar = 'ö';
-			break;
-		case 'u':
-			newChar = 'ü';
-			break;
-		case 'v':
-			newChar = 'Ä';
-			break;
-		case 'w':
-			newChar = 'Ë';
-			break;
-		case 'x':
-			newChar = 'Ï';
-			break;
-		case 'y':
-			newChar = 'Ö';
-			break;
-		case 'z':
-			newChar = 'Ü';
-			break;
+		if (cad1[i] == a)
+		{
+			return (i + 1);
+		}
+		i++;
 	}
-
-	fclose(file);
-	return (newChar);
+	return (-1);
 }
 
 // Función de verificación de si la cadena contiene caracteres especiales o números
@@ -222,12 +52,21 @@ int verif(char* x)
 
 char* encrypt(char* a)
 {
+	char cad2[53] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '?', '¿', '¡', '!', '\"', '\'', '=', ')', '(', '[', ']', '+', '*', '}', '{', '.', ':', ';', ',', '-', '/', '&', '\\', '%', '$', '#', '@', '<', '>', '|', '_', '^', '~', '`', ' ', 'ö', 'ü', 'Ä', 'Ë', 'Ï','Ö', 'Ü'};
 	char* newString = "";
 	int i = 0;
+	int f;
 
 	while (a[i] != '\0')
 	{
-		newString[i] = hash(a[i]);
+		int f = search(a[i]);
+		
+		if (f == -1)
+		{
+			char *x = "Ha habido un error al buscar el caracter en el diccionario\n";
+			return (x);
+		}
+		newString[i] = cad2[f];
 		i++;
 	}
 
@@ -244,7 +83,6 @@ int main(int argc, char** argv)
 		
 		if (a == 1)
 		{
-			//int x = length(argv[1]);
 			char *b = encrypt(argv[1]);
 			printf("La cadena encriptada ahora es: %s\n", b);
 			return (0);
