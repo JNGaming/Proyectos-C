@@ -25,11 +25,11 @@ char *randomPassword(int x)
 {
 	int i = 0;
 	char *newPassword = "";
-	char* o = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#%$!¡¿?/&()[]{}='^*+-_.:,;><";
+	char *o = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#%$\\!¡¿?/&()[]{}='^*+-_.:,;><";
 
 	while (i <= x)
 	{
-		int b = rand() % 93;
+		int b = rand() % 92;
 		newPassword[i] = o[b];
 		i++;
 	}
