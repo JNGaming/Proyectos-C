@@ -1,8 +1,8 @@
-#Calculadora de números enteros
+# Calculadora de números enteros
 
 ¿Cómo funciona? Debes ejecutar el archivo, añadiendo como parámetro un cálculo, para obtener su solución.
-\nValores admitidos:
-- "*" (2*3)
+Valores admitidos:
+- "\*" (2\*3)
 - "+" (2+3)
 - "/" (2/3)
 - "-" (2-3)
