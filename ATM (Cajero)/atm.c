@@ -6,6 +6,68 @@
 void seeMoney(void);
 void menu(void);
 
+// Función para crear un nuevo archivo
+void fileCreate(void)
+{
+	char buff[1000];
+	char name[] = "name = Vera";
+	char pin[] = "pin = 1234";
+	char money[] = "account = 2000";
+	FILE* file;
+
+	file = fopen("bankAccount.txt", "r");
+
+	if (file == 0 || file == NULL)
+	{
+		file = fopen("bankAccount.txt", "a+");
+
+		fprintf(file, "%s\n", name);
+
+		fprintf(file, "%s\n", pin);
+		
+		fprintf(file, "%s\n", money);
+
+		fclose(file);
+	}
+	seeMoney();
+}
+
+// Función de error al buscar los valores en el archivo .txt
+
+void error(void)
+{
+	printf("\n*** ERROR ***\nHa ocurrido un error al buscar los datos en el archivo .txt. Asegurate de que los valores estan introducidos de forma correcta.\n*************");
+	return;
+}
+
+// Función para sacar valores del archivo
+
+char* values(char* a)
+{
+	int i = 0;
+	int x = 0;
+	char* b = "";
+
+	while (a[i] != '\0')
+	{
+		if (a[i] == '=')
+		{
+			i++;
+			if (a[i] == ' ')
+			{
+				while (a[i] != '\0')
+				{
+					b[x] = a[i];
+					x++;
+					i++;
+				}
+			}
+		}
+		i++;
+	}
+	return(b);
+}
+
 // Función de salida
 
 void out(void)
@@ -21,7 +83,7 @@ void options(void)
 	int c;
 
 	printf("\n\n*** PRESIONA CUALQUIER TECLA ***\n1- Menu\n2- Salir\n********************************\n");
-	scanf("%i", &c);
+	scanf("%1i", &c);
 
 	switch (c)
 	{
@@ -43,7 +105,7 @@ void menu(void)
 	int op;
 
 	printf("\n\n******** MENU DEL CAJERO ********\n Por favor, elige una de estas opciones:\n\n1- Mostrar saldo\n2- Agregar dinero\n3- Retirar dinero\n4- Salir del programa\n\n(Agrega el numero de la opcion elegida)\n*********************************\n");
-	scanf("%d", &op);
+	scanf("%1d", &op);
 	switch (op)
 	{
 	case 1:
@@ -64,33 +126,33 @@ void menu(void)
 void seeMoney(void)
 {
 	char buff[1000];
-	char money[] = "2000";
+	char name[] = "name = Vera";
+	char pin[] = "pin = 1234";
+	char money[] = "account = 2000";
 	FILE* file;
 	
 	file = fopen("bankAccount.txt", "r");
 
 	if (file == 0 || file == NULL)
 	{
-		file = fopen("bankAccount.txt", "w");
-
-		int x = fprintf(file, "%s", money);
-		if (x >= 0)
-		{
-			fscanf(file, "%[^\n]", buff);
-
-			fclose(file);
-
-			printf("\n\n*** SALDO ***\nTienes %s$ en tu cuenta\n*************\n", buff);
-		}
+		fileCreate();
 	}
 	else
 	{
-		fscanf(file, "%[^\n]", buff);
+		int i = 0;
+		while (fscanf(file, "%[^\n]", buff) != EOF && i < 4)
+		{
+			fgetc(file);
+			i++;
+		}
 
 		fclose(file);
-		printf("\n\n*** SALDO ***\nTienes %s$ en tu cuenta\n*************\n", buff);
+
+		char* val = values(buff);
+
+		printf("\n\n*** SALDO ***\nTienes %s$ en tu cuenta\n*************\n", val);
+		options();
 	}
-	options();
 }
 
 // Función main
@@ -109,7 +171,7 @@ int main(void)
 		{
 			if (i == 0)
 			{
-				printf("\n*** SALIENDO DEL PROGRAMA ***\n*****************************\n");
+				out();
 				return;
 			}
 			printf("\n*** PIN INCORRECTO, QUEDA(N) %i OPORTUNIDAD(ES) ***\n**************************************************\n", i);
@@ -120,5 +182,7 @@ int main(void)
 	if (pin == 1234)
 	{
 		menu();
+		return;
 	}
+	return (0);
 }
