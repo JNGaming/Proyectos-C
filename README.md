@@ -6,3 +6,4 @@ Programas:
 - Creador de contraseñas aleatorias
 - Encriptador de cadenas
 - Calculadora
+- Simulador de Cajero Automático
